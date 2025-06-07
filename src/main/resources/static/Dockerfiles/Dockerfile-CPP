@@ -1,0 +1,6 @@
+FROM gcc:13.2.0
+
+WORKDIR /usr/src/app
+
+# Default entrypoint will compile and run the C++ file
+ENTRYPOINT ["sh", "-c"]
