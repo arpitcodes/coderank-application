@@ -1,0 +1,6 @@
+FROM python:3.11-slim
+
+WORKDIR /usr/src/app
+
+# Default command is to run Python with whatever file you pass
+ENTRYPOINT ["python"]

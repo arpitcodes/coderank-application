@@ -1,0 +1,6 @@
+FROM openjdk:21-slim
+
+WORKDIR /usr/src/app
+
+# Entry point will compile and run whatever Java file is passed
+ENTRYPOINT ["sh", "-c"]
