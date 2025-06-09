@@ -13,3 +13,13 @@ services:
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  springboot-app:
+    build: .
+    container_name: springboot-app
+    depends_on:
+      - kafka
+    ports:
+      - "9000:9000"
+
+
