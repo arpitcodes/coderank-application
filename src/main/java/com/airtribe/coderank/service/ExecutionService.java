@@ -71,7 +71,9 @@ public class ExecutionService {
         snippetFilePath = "C:\\tmp\\"+username+"\\"+languageName+"\\input_files\\";
         executionId = UUID.randomUUID().toString();
         snippetFileName = executionId+extension;
-        saveCodeSnippetInFile(codeSnippetDto.getCodeSnippet(), snippetFilePath+snippetFileName);
+
+
+        saveCodeSnippetInFile(codeSnippetDto.getCodeSnippet(),  snippetFilePath+snippetFileName);
         CodeSnippet codeSnippet = new CodeSnippet();
         codeSnippet.setUser(currentUser);
         codeSnippet.setExecutionId(executionId);
@@ -86,7 +88,7 @@ public class ExecutionService {
                 return ".py";
             case "java":
                 return ".java";
-            case "c++":
+            case "cpp":
                 return ".cpp";
             case "javascript":
                 return ".js";
@@ -103,6 +105,8 @@ public class ExecutionService {
                 file.createNewFile();       // create the file if it doesn't exist
                 System.out.println("File created at: " + file.getAbsolutePath());
             } else {
+                file.delete();
+                file.createNewFile();
                 System.out.println("File already exists. Writing to it...");
             }
             FileWriter writer = new FileWriter(file, true); // set true for append mode

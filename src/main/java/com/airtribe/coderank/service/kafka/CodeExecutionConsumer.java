@@ -53,23 +53,23 @@ public class CodeExecutionConsumer {
         ProcessBuilder processBuilder=null;
 
         switch (request.getLanguage().toLowerCase()){
-//            case "java":
-//                processBuilder = new ProcessBuilder(
-//                        "docker","run","--rm","-v",
-//                        filePath+":/user/src/app",
-//                        imageName,
-//                        "\"javac "+fileName+".java && java "+fileName+"\""
-//                );
-//
-//                break;
-//            case "c++":
-//                processBuilder = new ProcessBuilder(
-//                        "docker", "run", "--rm",
-//                        "-v", filePath+":/usr/src/app",
-//                        imageName,
-//                        "\"g++ "+fileName+".cpp -o "+fileName+" && ./"+fileName
-//                );
-//                break;
+            case "java":
+                processBuilder = new ProcessBuilder(
+                        "docker","run","--rm","-v",
+                        filePath+":/user/src/app",
+                        imageName,
+                        "\"javac "+fileName+".java && java "+fileName+"\""
+                );
+
+                break;
+            case "cpp":
+                processBuilder = new ProcessBuilder(
+                        "docker", "run", "--rm",
+                        "-v", filePath+":/usr/src/app",
+                        imageName,
+                        "\"g++ "+fileName+" -o "+ request.getExecutionId()+" && ./"+ request.getExecutionId()+"\""
+                );
+                break;
             case "javascript":
             case "python":
                 processBuilder = new ProcessBuilder(
@@ -100,7 +100,7 @@ public class CodeExecutionConsumer {
 
         String userName = userRepository.findById(Integer.parseInt(request.getUserId())).get().getUsername();
 
-        String OUTPUT_FILE_PATH="C:\\tmp\\"+userName+"\\python\\output_files\\";
+        String OUTPUT_FILE_PATH="C:\\tmp\\"+userName+"\\"+request.getLanguage()+"\\output_files\\";
 
 
         File outputFile = new File(OUTPUT_FILE_PATH+request.getExecutionId()+".txt");
